@@ -36,4 +36,10 @@ class TestStatistics(unittest.TestCase):
     
     def test_top(self):
         self.assertAlmostEqual(self.statistics.top(1)[0].name,"Gretzky")
+    def test_top_points(self):
+        self.assertAlmostEqual(self.statistics.top(1)[0].name,"Gretzky")
+    def test_top_goals(self):
+        self.assertAlmostEqual(self.statistics.top(1,2)[0].name,"Lemieux")
+    def test_top_assists(self):
+        self.assertAlmostEqual(self.statistics.top(1,3)[0].name,"Gretzky")
     
