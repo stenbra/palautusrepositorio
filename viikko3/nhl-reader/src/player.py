@@ -8,6 +8,10 @@ class Player:
         self.penalties = penalties
         self.games =games
 
+    @property
+    def points(self):
+        return self.goals + self.assists
+        
     def get_nationality(self):
         return self.nationality
 
