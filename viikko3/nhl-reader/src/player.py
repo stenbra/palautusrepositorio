@@ -7,9 +7,9 @@ class Player:
         self.assists = assists
         self.penalties = penalties
         self.games =games
-        
+
     def get_nationality(self):
         return self.nationality
 
     def __str__(self):
-        return "{0} team {1} goals {2} assists {3}".format(self.name,self.team,self.goals,self.assists)
+        return f"{self.name:20}  {self.team:2}  {self.goals:2} + {self.assists:2} = {self.goals+self.assists:2}"

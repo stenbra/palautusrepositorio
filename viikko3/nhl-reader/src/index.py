@@ -2,6 +2,8 @@ import requests
 import time
 from player import Player
 
+def sort_by_points(player):
+    return player.goals + player.assists
 def main():
     url = "https://studies.cs.helsinki.fi/nhlstats/2021-22/players"
     response = requests.get(url).json()
@@ -20,9 +22,10 @@ def main():
 
         players.append(player)
 
+    sorted_players = sorted(players,reverse=True,key=sort_by_points)
     print("Players from FIN")
 
-    for player in players:
+    for player in sorted_players:
         if(player.get_nationality()=="FIN"):
             print(player)
 
