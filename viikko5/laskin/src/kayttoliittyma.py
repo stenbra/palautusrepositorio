@@ -13,34 +13,53 @@ class Komento(Enum):
 class Summa:
     def __init__(self, sovellus: Sovelluslogiikka, lue_syote):
         self.sovellus = sovellus
+        self.edelinenArvo =0
         self.lue_syote = lue_syote
 
     def suorita(self):
         syote = int(self.lue_syote())
-        self.sovellus.plus(syote)
+        self.edelinenArvo = syote
+        self.sovellus.plus(syote,self)
+    
+    def kumoa(self):
+        self.sovellus.miinus(self.edelinenArvo)
+        self.edelinenArvo=0
 
 class Erotus:
     def __init__(self, sovellus: Sovelluslogiikka, lue_syote):
         self.sovellus = sovellus
+        self.edelinenArvo =0
         self.lue_syote = lue_syote
 
     def suorita(self):
         syote = int(self.lue_syote())
-        self.sovellus.miinus(syote)
+        self.edelinenArvo = syote
+        self.sovellus.miinus(syote,self)
+
+    def kumoa(self):
+        self.sovellus.plus(self.edelinenArvo)
+        self.edelinenArvo=0
+
 
 class Nollaus:
     def __init__(self, sovellus: Sovelluslogiikka):
         self.sovellus = sovellus
+        self.edelinenArvo=0
 
     def suorita(self):
-        self.sovellus.nollaa()
+        self.edelinenArvo= self.sovellus.tulos
+        self.sovellus.nollaa(self)
+
+    def kumoa(self):
+        self.sovellus.aseta_arvo(self.edelinenArvo)
+        self.edelinenArvo=0
 
 class Kumoa:
     def __init__(self, sovellus: Sovelluslogiikka):
         self.sovellus = sovellus
 
     def suorita(self):
-        pass
+        self.sovellus.kumoa()
 
 class Kayttoliittyma:
     def __init__(self, sovellus, root):
