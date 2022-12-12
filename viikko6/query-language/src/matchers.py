@@ -1,8 +1,6 @@
 class QueryBuilder:
-    def __init__(self,matchers=None):
+    def __init__(self):
         self.matchers = []
-        if matchers:
-            self.matchers.append(matchers)
 
     def All(self):
         self.matchers.append(All())
@@ -20,7 +18,8 @@ class QueryBuilder:
         return self
 
     def oneOf(self, *matchers):
-        return QueryBuilder(Or(*matchers))
+        self.matchers=[Or(*matchers)]
+        return self
 
     def build(self):
         return And(*self.matchers)
