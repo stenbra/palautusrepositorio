@@ -1,7 +1,12 @@
 class QueryBuilder:
-    def __init__(self):
+    def __init__(self,matchers=None):
         self.matchers = []
+        if matchers:
+            self.matchers.append(matchers)
 
+    def All(self):
+        self.matchers.append(All())
+        return self
     def playsIn(self, team):
         self.matchers.append(PlaysIn(team))
         return self
@@ -13,6 +18,9 @@ class QueryBuilder:
     def hasFewerThan(self, value, attr):
         self.matchers.append(HasFewerThan(value, attr))
         return self
+
+    def oneOf(self, *matchers):
+        return QueryBuilder(Or(*matchers))
 
     def build(self):
         return And(*self.matchers)
